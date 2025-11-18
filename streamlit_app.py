@@ -443,4 +443,4 @@ if st.session_state.current_slide == "dashboard":
         {"name": "Hot Potato Orchestrator", "id": "15e1594c-f982-47e3-bf9d-10a2fe9d73af", "status": "ACTIVE"},
         {"name": "Night Coding Automator", "id": "e76149c3-7c86-4d64-a2d2-240c81f0fc1d", "status": "STANDBY"},
         {"name": "Quality Validator Agent", "id": "c3dac54b-655a-4060-b07b-5637ea8ea47b", "status": "ACTIVE"},
-        {"name": "CEO AI", "id": "2a1cb"}
+        {"name": "CEO AI", "id": "2a1cb
