@@ -1,3 +1,19 @@
+# Add these imports at the top
+import asyncio
+import sys
+import os
+from datetime import datetime
+
+# Import the real API rotation system
+try:
+    from api_rotation_system import (
+        auto_replenishing_rotator, 
+        initialize_auto_replenishing_system,
+        process_ai_request
+    )
+except ImportError:
+    # Fallback for when API system isn't available
+    auto_replenishing_rotator = None
 import streamlit as st
 import time
 import json
