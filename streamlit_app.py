@@ -1,39 +1,16 @@
-# Add these imports at the top
-import asyncio
-import sys
-import os
-from datetime import datetime
-
-# Import the real API rotation system
-try:
-    from api_rotation_system import (
-        auto_replenishing_rotator, 
-        initialize_auto_replenishing_system,
-        process_ai_request
-    )
-except ImportError:
-    # Fallback for when API system isn't available
-    auto_replenishing_rotator = None
-Looking at your **sophisticated 22-node Free AI Management Platform** canvas, here's the completely clean code without any emojis:
-
-## 📄 **CREATE: streamlit_app.py** (Clean Professional Code - No Emojis)
-
-```python
 import streamlit as st
 import time
 import json
 from datetime import datetime
-import os
 
 # Configure the page
 st.set_page_config(
     page_title="Free AI Management Platform",
-    page_icon="robot",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for professional styling
+# Custom CSS
 st.markdown("""
 <style>
     .chatbot-container {
@@ -56,30 +33,12 @@ st.markdown("""
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         transform: translateY(-2px);
     }
-    .drag-drop-zone {
-        border: 2px dashed #007bff;
-        border-radius: 8px;
-        padding: 2rem;
-        text-align: center;
-        background-color: #f8f9fa;
-        margin: 1rem 0;
-    }
-    .sentence-editor {
-        background-color: #fff3cd;
-        padding: 0.5rem;
-        border-radius: 4px;
-        border-left: 3px solid #ffc107;
-        margin: 0.25rem 0;
-        cursor: pointer;
-    }
-    .agent-node {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 1rem;
+    .research-section {
+        background-color: #fff8e1;
+        padding: 1.5rem;
         border-radius: 10px;
-        margin: 0.5rem;
-        cursor: move;
-        user-select: none;
+        border-left: 4px solid #ff9800;
+        margin-bottom: 1rem;
     }
     .night-section {
         background-color: #1a1a2e;
@@ -89,31 +48,20 @@ st.markdown("""
         border-left: 4px solid #6c5ce7;
         margin-bottom: 1rem;
     }
-    .research-section {
-        background-color: #fff8e1;
-        padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #ff9800;
-        margin-bottom: 1rem;
-    }
 </style>
 """, unsafe_allow_html=True)
 
 # Initialize session states
 if 'chat_messages' not in st.session_state:
     st.session_state.chat_messages = {}
-if 'workflow_nodes' not in st.session_state:
-    st.session_state.workflow_nodes = []
-if 'sentence_edits' not in st.session_state:
-    st.session_state.sentence_edits = []
 if 'night_projects' not in st.session_state:
     st.session_state.night_projects = []
 
-# Title with AI count from actual canvas
+# Title with actual canvas data
 st.title("Free AI Management Platform")
 st.markdown("**22 Active Nodes | 244+ AI Network | System Coordinator Managing All**")
 
-# Your actual canvas nodes from the data
+# Canvas nodes from your actual data
 canvas_nodes = {
     "System Coordinator Agent": {"id": "919a0cb6-4740-4890-a32b-bfc3368b0b58", "status": "RUNNING"},
     "Night Coding Automator": {"id": "e76149c3-7c86-4d64-a2d2-240c81f0fc1d", "status": "STANDBY"},
@@ -124,7 +72,7 @@ canvas_nodes = {
     "AI Network Dashboard": {"id": "0a18b0e4-421b-4749-ae79-2024b7b18e5b", "status": "ACTIVE"}
 }
 
-# Sidebar with real canvas status
+# Sidebar
 st.sidebar.title("System Dashboard")
 st.sidebar.markdown("---")
 st.sidebar.markdown("**Live Canvas Nodes:**")
@@ -136,17 +84,15 @@ for node, data in canvas_nodes.items():
     else:
         st.sidebar.warning(f"{node}: {data['status']}")
 
-# Main navigation
+# Navigation
 page = st.selectbox("Choose Interface", [
     "Interactive Dashboard",
     "Base 44 Chatbot", 
     "Research Chatbot",
-    "Night Operations Chatbot",
-    "N8N Workflow Builder",
-    "Sentence Editor"
+    "Night Operations Chatbot"
 ])
 
-# Interactive Dashboard - Real Canvas Components
+# Interactive Dashboard
 if page == "Interactive Dashboard":
     st.header("Interactive System Dashboard")
     st.markdown("**Preview, Edit, and Test All Canvas Components**")
@@ -154,7 +100,7 @@ if page == "Interactive Dashboard":
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.subheader("Canvas Components - Live from Your 22-Node System")
+        st.subheader("Canvas Components from Your 22-Node System")
         
         # Real Interfaces from canvas
         st.markdown("**INTERFACES (3 nodes):**")
@@ -166,7 +112,7 @@ if page == "Interactive Dashboard":
         
         for interface in interfaces:
             with st.container():
-                st.markdown(f'<div class="dashboard-card">', unsafe_allow_html=True)
+                st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
                 col1a, col1b, col1c, col1d = st.columns([2, 1, 1, 1])
                 with col1a:
                     st.write(f"**{interface['name']}**")
@@ -198,7 +144,7 @@ if page == "Interactive Dashboard":
         
         for agent in agents:
             with st.container():
-                st.markdown(f'<div class="dashboard-card">', unsafe_allow_html=True)
+                st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
                 col1a, col1b, col1c, col1d = st.columns([2, 1, 1, 1])
                 with col1a:
                     st.write(f"**{agent['name']}**")
@@ -220,19 +166,16 @@ if page == "Interactive Dashboard":
         if 'current_chat' in st.session_state:
             st.write(f"**Active Chat:** {st.session_state.current_chat}")
             
-            # Initialize chat for selected component
             chat_key = st.session_state.current_chat
             if chat_key not in st.session_state.chat_messages:
                 st.session_state.chat_messages[chat_key] = []
             
-            # Display chat messages
             for msg in st.session_state.chat_messages[chat_key]:
                 if msg["role"] == "user":
                     st.write(f"**You:** {msg['content']}")
                 else:
                     st.write(f"**{chat_key}:** {msg['content']}")
             
-            # Chat input
             test_message = st.text_input("Test message:", key="dashboard_input")
             if st.button("Send", key="dashboard_send"):
                 if test_message:
@@ -251,18 +194,15 @@ elif page == "Base 44 Chatbot":
     st.header("Base 44 AI Chatbot")
     st.markdown("**Connected to Hot Potato Orchestrator and 244+ AI Network**")
     
-    # Initialize chat
     if 'base44_chat' not in st.session_state.chat_messages:
         st.session_state.chat_messages['base44_chat'] = []
     
-    # Chat display
     for message in st.session_state.chat_messages['base44_chat']:
         if message["role"] == "user":
             st.markdown(f"**You:** {message['content']}")
         else:
             st.markdown(f"**Base 44 AI:** {message['content']}")
     
-    # Chat input
     col1, col2 = st.columns([4, 1])
     with col1:
         user_input = st.text_input("Chat with Base 44 AI:", key="base44_input")
@@ -282,7 +222,6 @@ elif page == "Base 44 Chatbot":
             )
         st.rerun()
     
-    # File upload
     uploaded_file = st.file_uploader("Upload files:", type=['txt', 'pdf', 'docx', 'py'])
     if uploaded_file:
         st.success(f"File {uploaded_file.name} uploaded to Base 44 system")
@@ -295,7 +234,6 @@ elif page == "Research Chatbot":
     st.header("Research Department Chatbot")
     st.markdown("**Connected to Research Department Manager AI and Research Sub-AIs Collective**")
     
-    # Initialize chat
     if 'research_chat' not in st.session_state.chat_messages:
         st.session_state.chat_messages['research_chat'] = []
     
@@ -303,14 +241,12 @@ elif page == "Research Chatbot":
         "Quick Research", "Deep Analysis", "Literature Review", "Data Analysis", "Fact Checking"
     ])
     
-    # Chat display
     for message in st.session_state.chat_messages['research_chat']:
         if message["role"] == "user":
             st.markdown(f"**Researcher:** {message['content']}")
         else:
             st.markdown(f"**Research AI Network:** {message['content']}")
     
-    # Research input
     research_query = st.text_area("Research Query:", height=100, key="research_input")
     
     col1, col2 = st.columns(2)
@@ -340,18 +276,15 @@ elif page == "Night Operations Chatbot":
     st.header("Night Coding Automator Chatbot")
     st.markdown("**Connected to Night Coding Automator and Offline Coding Pipeline**")
     
-    # Initialize chat
     if 'night_chat' not in st.session_state.chat_messages:
         st.session_state.chat_messages['night_chat'] = []
     
-    # Chat display
     for message in st.session_state.chat_messages['night_chat']:
         if message["role"] == "user":
             st.markdown(f"**Day User:** {message['content']}")
         else:
             st.markdown(f"**Night Automator:** {message['content']}")
     
-    # Task input
     night_task = st.text_area("Queue for Night Processing:", height=100, key="night_input")
     
     col1, col2 = st.columns(2)
@@ -375,26 +308,13 @@ elif page == "Night Operations Chatbot":
                                         type=['py', 'js', 'html', 'css'], 
                                         accept_multiple_files=True)
     
-    # Night Project Preview Section
+    # Night Project Preview
     st.subheader("Night Project Management")
     
-    # Initialize projects if needed
     if not st.session_state.night_projects:
         st.session_state.night_projects = [
-            {
-                "id": 1,
-                "name": "Code Review Automation",
-                "status": "Queued",
-                "progress": 0,
-                "files": ["main.py", "utils.py"]
-            },
-            {
-                "id": 2,
-                "name": "Research Analysis Project", 
-                "status": "Completed",
-                "progress": 100,
-                "files": ["research_data.pdf"]
-            }
+            {"id": 1, "name": "Code Review Automation", "status": "Queued", "progress": 0, "files": ["main.py", "utils.py"]},
+            {"id": 2, "name": "Research Analysis Project", "status": "Completed", "progress": 100, "files": ["research_data.pdf"]}
         ]
     
     for project in st.session_state.night_projects:
@@ -403,4 +323,39 @@ elif page == "Night Operations Chatbot":
         with col1:
             st.write(f"**{project['name']}**")
             st.write(f"Status: {project['status']}")
-            st.write(f"Files: {', '.join(project['files'])
+            st.write(f"Files: {', '.join(project['files'])}")
+            if project['progress'] > 0:
+                st.progress(project['progress'] / 100)
+        
+        with col2:
+            if project['status'] == "Completed":
+                if st.button(f"Preview Results", key=f"preview_{project['id']}"):
+                    st.success(f"Opening preview for {project['name']}")
+            else:
+                st.write("Preview available after completion")
+        
+        with col3:
+            if project['status'] in ["Running", "Queued"]:
+                if st.button(f"Stop Project", key=f"stop_{project['id']}"):
+                    project['status'] = "Stopped"
+                    st.warning(f"Project {project['name']} stopped")
+                    st.rerun()
+            elif project['status'] == "Completed":
+                if st.button(f"Archive", key=f"archive_{project['id']}"):
+                    st.info(f"Project {project['name']} archived")
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# Footer
+st.markdown("---")
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.metric("Total Nodes Active", "22", "0")
+with col2:
+    st.metric("AI Network Size", "244+", "+12")
+with col3:
+    st.metric("API Accounts Available", "1000+", "Auto-scaling")
+with col4:
+    st.metric("System Uptime", "99.9%", "+0.1%")
+
+st.markdown("**Your complete 22-node Free AI Management Platform with 244+ AIs working together**")
