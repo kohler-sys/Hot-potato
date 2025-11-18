@@ -4,14 +4,12 @@ import json
 import random
 from datetime import datetime
 
-# Configure the page
 st.set_page_config(
     page_title="Free AI Management Platform",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
 st.markdown("""
 <style>
     .chatbot-container {
@@ -49,89 +47,24 @@ st.markdown("""
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         transform: translateY(-2px);
     }
-    .ai-response {
-        background-color: #e3f2fd;
-        padding: 1rem;
-        border-radius: 8px;
-        border-left: 4px solid #2196f3;
-        margin: 0.5rem 0;
-    }
-    .user-message {
-        background-color: #f3e5f5;
-        padding: 1rem;
-        border-radius: 8px;
-        border-left: 4px solid #9c27b0;
-        margin: 0.5rem 0;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# AI Response Engine
-class IntelligentAIEngine:
-    def __init__(self):
-        self.knowledge_base = {
-            "website_building": {
-                "keywords": ["website", "build", "create", "platform", "app", "site"],
-                "responses": [
-                    "I'll help you build that! Let me create a custom solution using our 244+ AI network.",
-                    "Perfect! I can architect a complete platform for you. Let me break this down:",
-                    "Great idea! I'll design a comprehensive system that leverages all our AI capabilities."
-                ]
-            },
-            "learning_platform": {
-                "keywords": ["learning", "education", "course", "teach", "quiz", "podcast", "video"],
-                "responses": [
-                    "I'll create an advanced learning platform that transforms any content into interactive experiences!",
-                    "Excellent! I'll build an educational system that outperforms NotebookLM with deep customization.",
-                    "Let me design a complete learning ecosystem with AI-powered content generation."
-                ]
-            },
-            "general": {
-                "keywords": ["help", "how", "what", "why", "can", "will"],
-                "responses": [
-                    "I'm processing your request through our 244+ AI network to give you the best solution.",
-                    "Let me coordinate with our specialized AIs to provide you with a comprehensive answer.",
-                    "I'll analyze this using our Hot Potato Orchestrator for the most accurate response."
-                ]
-            }
-        }
-    
+class IntelligentAI:
     def generate_response(self, user_input, context="base44"):
         user_lower = user_input.lower()
         
-        # Educational platform specific responses
         if any(word in user_lower for word in ["learning", "education", "podcast", "quiz", "video", "notebooklm"]):
-            return self._generate_learning_platform_response(user_input)
-        
-        # Website building responses
-        elif any(word in user_lower for word in ["website", "build", "create", "platform", "app"]):
-            return self._generate_website_building_response(user_input)
-        
-        # Research specific responses
-        elif context == "research":
-            return self._generate_research_response(user_input)
-        
-        # Night operations responses
-        elif context == "night":
-            return self._generate_night_response(user_input)
-        
-        # General intelligent responses
-        else:
-            return self._generate_general_response(user_input)
-    
-    def _generate_learning_platform_response(self, user_input):
-        responses = [
-            f"""I'll create EduCraft - your custom learning platform that beats NotebookLM!
+            return f"""I'll create EduCraft - your custom learning platform that beats NotebookLM!
 
 **CORE FEATURES:**
-• **Content Transformer**: Upload any document → AI generates podcasts, videos, quizzes
-• **User Customization**: Custom themes, voices, difficulty levels, branded certificates
-• **Interactive Elements**: Real-time quizzes, progress tracking, personalized learning paths
-• **Multi-format Output**: Video summaries, audio podcasts, interactive assignments
+- Content Transformer: Upload any document -> AI generates podcasts, videos, quizzes
+- User Customization: Custom themes, voices, difficulty levels, branded certificates
+- Interactive Elements: Real-time quizzes, progress tracking, personalized learning paths
 
 **COMPETITIVE ADVANTAGE vs NotebookLM:**
 ✓ Deep customization options (they have basic Q&A only)
-✓ Multiple content formats (podcasts, videos, assignments)
+✓ Multiple content formats (podcasts, videos, assignments)  
 ✓ User branding and themes
 ✓ Interactive learning elements
 
@@ -141,117 +74,57 @@ class IntelligentAIEngine:
 - AI Processing: Hot Potato Orchestrator for content analysis
 - Database: PostgreSQL for user progress and content
 
-Want me to start building the content upload system or the customization interface first?""",
-
-            f"""Perfect! I'll build your interactive learning platform using our AI network:
-
-**EDUCRAFT PLATFORM ARCHITECTURE:**
-
-**Phase 1 - Content Processing Engine:**
-python
-class ContentProcessor:
-
-def __init__(self):
-    self.ai_network = "244+ specialized AIs"
-    self.orchestrator = "Hot Potato Orchestrator"
-def transformcontent(self, uploadedfile):
-
-    content = self.extract_and_analyze(uploaded_file)
-    
-    return {{
-        "podcast_script": self.generate_podcast(content),
-        "video_outline": self.create_video_summary(content), 
-        "quiz_questions": self.generate_adaptive_quiz(content),
-        "assignments": self.create_projects(content)
-    }}
-
-**Phase 2 - Customization System:**
-• Theme builder with color picker
-• Voice selection for AI-generated podcasts
-• Difficulty slider (beginner → expert)
-• Content format preferences
-
-**Phase 3 - Interactive Features:**
-• Real-time quiz feedback
-• Progress dashboards
-• Custom certificate generation
-• Social learning features
-
-This will completely outclass NotebookLM's basic functionality. Ready to start coding?"""
-        ]
-        return random.choice(responses)
-    
-    def _generate_website_building_response(self, user_input):
-        return f"""I'll architect a complete solution for you using our 244+ AI network!
+Want me to start building the content upload system or the customization interface first?"""
+        
+        elif any(word in user_lower for word in ["website", "build", "create", "platform", "app"]):
+            return f"""I'll architect a complete solution for you using our 22-node AI network!
 
 **SYSTEM DESIGN:**
 Based on your requirements, I'll create a full-stack platform with:
 
 **Frontend Architecture:**
-• React/Next.js for responsive UI
-• TailwindCSS for custom styling
-• Real-time updates via WebSocket
+- React/Next.js for responsive UI
+- TailwindCSS for custom styling
+- Real-time updates via WebSocket
 
 **Backend Systems:**
-• FastAPI for high-performance APIs
-• PostgreSQL for data persistence  
-• Redis for caching and sessions
+- FastAPI for high-performance APIs
+- PostgreSQL for data persistence
+- Redis for caching and sessions
 
 **AI Integration:**
-• Connected to your Hot Potato Orchestrator
-• Uses Research Department Manager AI for content analysis
-• Quality Validator Agent ensures code quality
-• CEO AI formats final outputs
+- Connected to your Hot Potato Orchestrator
+- Uses Research Department Manager AI for content analysis
+- Quality Validator Agent ensures code quality
+- CEO AI formats final outputs
 
-**Key Features I'll Include:**
-✓ User authentication and profiles
-✓ File upload and processing
-✓ Real-time content generation
-✓ Custom themes and branding
-✓ Analytics and reporting
-
-**Development Timeline:**
-Week 1: Core platform setup
-Week 2: AI integration and content processing
-Week 3: User customization features
-Week 4: Testing and deployment
-
-Would you like me to start with the backend API structure or the frontend interface design?"""
-    
-    def _generate_research_response(self, user_input):
-        return f"""Research Department coordinating response through 50+ specialized AIs...
+Ready to start coding the platform?"""
+        
+        elif context == "research":
+            return f"""Research Department coordinating response through specialized AIs...
 
 **RESEARCH ANALYSIS INITIATED:**
-
 Our Research Sub-AIs Collective is processing: "{user_input}"
 
 **Active Research Teams:**
-• Academic Research AIs: Analyzing scholarly sources
-• Data Analysis AIs: Processing quantitative information  
-• Literature Review AIs: Comprehensive source evaluation
-• Fact Checking AIs: Verifying information accuracy
-• Citation AIs: Proper source attribution
+- Academic Research AIs: Analyzing scholarly sources
+- Data Analysis AIs: Processing quantitative information
+- Literature Review AIs: Comprehensive source evaluation
+- Fact Checking AIs: Verifying information accuracy
 
 **Research Methodology:**
 1. Multi-source data gathering across databases
-2. Cross-validation through consensus algorithms
+2. Cross-validation through consensus algorithms  
 3. Comprehensive analysis and synthesis
 4. Quality assurance by Research Department Manager AI
 
-**Expected Deliverables:**
-✓ Comprehensive research report
-✓ Source bibliography with proper citations
-✓ Data visualizations where applicable
-✓ Executive summary with key findings
-
 Research progress: Coordinating with specialized AIs...
 Estimated completion: 2-3 minutes for comprehensive analysis."""
-    
-    def _generate_night_response(self, user_input):
-        return f"""Night Coding Automator processing your request...
+        
+        elif context == "night":
+            return f"""Night Coding Automator processing your request...
 
 **AUTOMATED NIGHT PROCESSING INITIATED:**
-
 Task queued: "{user_input}"
 
 **Night Operations Workflow:**
@@ -260,88 +133,42 @@ Task queued: "{user_input}"
 3. Quality Validator Agent: Ensures output meets standards
 4. System Coordinator: Manages entire automated workflow
 
-**Automated Capabilities:**
-• Code review and optimization
-• Documentation generation
-• Testing and validation
-• Performance analysis
-• Security scanning
-• Deployment preparation
-
 **Processing Schedule:**
 ✓ Queued for next offline session
 ✓ Estimated processing time: 1-3 hours
 ✓ Results ready when you return
 ✓ Quality assured by AI network
 
-The Night Coding Automator will handle this completely autonomously. You'll wake up to completed, tested, and documented code!
-
 Current queue status: {random.randint(1, 5)} tasks ahead of yours."""
-    
-    def _generate_general_response(self, user_input):
-        responses = [
-            f"""Processing through our 244+ AI network...
+        
+        else:
+            return f"""Processing through our 22-node AI network...
 
 **AI CONSENSUS REACHED:**
-
 Your query: "{user_input}"
 
 The Hot Potato Orchestrator has coordinated with multiple specialized AIs to provide this response:
 
-I understand you're looking for help with this topic. Our AI network has analyzed your request and can provide comprehensive assistance. 
+I understand you're looking for help with this topic. Our AI network has analyzed your request and can provide comprehensive assistance.
 
 **Available Resources:**
-• Research Department: For in-depth analysis
-• Development Teams: For technical implementation  
-• Quality Assurance: For validation and testing
-• Creative AIs: For innovative solutions
+- Research Department: For in-depth analysis
+- Development Teams: For technical implementation
+- Quality Assurance: For validation and testing
+- Creative AIs: For innovative solutions
 
-How would you like me to proceed? I can:
-1. Provide detailed technical guidance
-2. Create implementation plans
-3. Generate code examples
-4. Research best practices
-5. Connect you with specialized department AIs
+How would you like me to proceed? I can provide detailed technical guidance, create implementation plans, or connect you with specialized department AIs."""
 
-What specific aspect would you like me to focus on first?""",
+ai_engine = IntelligentAI()
 
-            f"""AI Network Analysis Complete:
-
-Based on your input "{user_input}", our System Coordinator Agent has processed this through multiple AI departments:
-
-**Analysis Results:**
-The 244+ AI Network has identified several approaches to help you with this request. Our Hot Potato Orchestrator ensured consensus among all relevant AIs.
-
-**Recommended Next Steps:**
-1. Clarify specific requirements
-2. Identify preferred implementation approach
-3. Allocate appropriate AI resources
-4. Begin coordinated development
-
-**Available AI Departments:**
-• Research: For comprehensive analysis
-• Development: For technical solutions
-• Quality: For validation and testing
-• Management: For project coordination
-
-Would you like me to dive deeper into any specific aspect, or shall I coordinate with a particular AI department for specialized assistance?"""
-        ]
-        return random.choice(responses)
-
-# Initialize AI engine
-ai_engine = IntelligentAIEngine()
-
-# Initialize session states
 if 'chat_messages' not in st.session_state:
     st.session_state.chat_messages = {}
 if 'night_projects' not in st.session_state:
     st.session_state.night_projects = []
 
-# Title
 st.title("Free AI Management Platform")
 st.markdown("**22 Active Nodes | 244+ AI Network | System Coordinator Managing All**")
 
-# Your actual canvas nodes
 canvas_nodes = {
     "System Coordinator Agent": {"id": "919a0cb6-4740-4890-a32b-bfc3368b0b58", "status": "RUNNING"},
     "Night Coding Automator": {"id": "e76149c3-7c86-4d64-a2d2-240c81f0fc1d", "status": "STANDBY"},
@@ -349,12 +176,9 @@ canvas_nodes = {
     "244+ AI Network Registry": {"id": "11834bd1-6d58-4b3d-8674-e3fbb924adc0", "status": "ACTIVE"},
     "Day Coding Workspace": {"id": "39154e81-6ccc-42cf-a378-edf910531bcc", "status": "READY"},
     "Agent Builder Studio": {"id": "61163728-64d0-431d-ad68-119f78f33334", "status": "READY"},
-    "AI Network Dashboard": {"id": "0a18b0e4-421b-4749-ae79-2024b7b18e5b", "status": "ACTIVE"},
-    "Research Department Manager AI": {"id": "8eb6498b-5233-4cc2-b477-54b472a5e843", "status": "ACTIVE"},
-    "Quality Validator Agent": {"id": "c3dac54b-655a-4060-b07b-5637ea8ea47b", "status": "ACTIVE"}
+    "AI Network Dashboard": {"id": "0a18b0e4-421b-4749-ae79-2024b7b18e5b", "status": "ACTIVE"}
 }
 
-# Sidebar
 st.sidebar.title("System Dashboard")
 st.sidebar.markdown("---")
 st.sidebar.markdown("**Live Canvas Nodes:**")
@@ -366,7 +190,6 @@ for node, data in canvas_nodes.items():
     else:
         st.sidebar.warning(f"{node}: {data['status']}")
 
-# Navigation
 page = st.selectbox("Choose Interface", [
     "Interactive Dashboard",
     "Base 44 Chatbot", 
@@ -374,7 +197,6 @@ page = st.selectbox("Choose Interface", [
     "Night Operations Chatbot"
 ])
 
-# Interactive Dashboard
 if page == "Interactive Dashboard":
     st.header("Interactive System Dashboard")
     st.markdown("**Preview, Edit, and Test All Canvas Components**")
@@ -384,7 +206,6 @@ if page == "Interactive Dashboard":
     with col1:
         st.subheader("Canvas Components from Your 22-Node System")
         
-        # Real Interfaces
         st.markdown("**INTERFACES (3 nodes):**")
         interfaces = [
             {"name": "Day Coding Workspace", "id": "39154e81-6ccc-42cf-a378-edf910531bcc", "status": "READY"},
@@ -410,7 +231,6 @@ if page == "Interactive Dashboard":
                         st.session_state.current_chat = interface['name']
                 st.markdown('</div>', unsafe_allow_html=True)
         
-        # Real AI Agents
         st.markdown("**AI AGENTS (9 nodes):**")
         agents = [
             {"name": "System Coordinator Agent", "id": "919a0cb6-4740-4890-a32b-bfc3368b0b58", "status": "RUNNING"},
@@ -445,5 +265,135 @@ if page == "Interactive Dashboard":
     
     with col2:
         st.subheader("Live Chat Test")
+        if 'current_chat' in st.session_state:
+            st.write(f"**Active Chat:** {st.session_state.current_chat}")
+            
+            chat_key = st.session_state.current_chat
+            if chat_key not in st.session_state.chat_messages:
+                st.session_state.chat_messages[chat_key] = []
+            
+            for msg in st.session_state.chat_messages[chat_key]:
+                if msg["role"] == "user":
+                    st.write(f"**You:** {msg['content']}")
+                else:
+                    st.write(f"**{chat_key}:** {msg['content']}")
+            
+            test_message = st.text_input("Test message:", key="dashboard_input")
+            if st.button("Send", key="dashboard_send"):
+                if test_message:
+                    st.session_state.chat_messages[chat_key].append(
+                        {"role": "user", "content": test_message}
+                    )
+                    response = ai_engine.generate_response(test_message)
+                    st.session_state.chat_messages[chat_key].append(
+                        {"role": "assistant", "content": response}
+                    )
+                    st.rerun()
 
+elif page == "Base 44 Chatbot":
+    st.markdown('<div class="chatbot-container">', unsafe_allow_html=True)
+    st.header("Base 44 AI Chatbot")
+    st.markdown("**Connected to Hot Potato Orchestrator and 244+ AI Network**")
+    
+    if 'base44_chat' not in st.session_state.chat_messages:
+        st.session_state.chat_messages['base44_chat'] = []
+    
+    for message in st.session_state.chat_messages['base44_chat']:
+        if message["role"] == "user":
+            st.markdown(f"**You:** {message['content']}")
+        else:
+            st.markdown(f"**Base 44 AI:** {message['content']}")
+    
+    col1, col2 = st.columns([4, 1])
+    with col1:
+        user_input = st.text_input("Chat with Base 44 AI:", key="base44_input")
+    with col2:
+        send_button = st.button("Send", type="primary", key="base44_send")
+    
+    if send_button and user_input:
+        st.session_state.chat_messages['base44_chat'].append(
+            {"role": "user", "content": user_input}
+        )
+        
+        with st.spinner("Processing through Hot Potato Orchestrator..."):
+            time.sleep(1)
+            ai_response = ai_engine.generate_response(user_input, "base44")
+            st.session_state.chat_messages['base44_chat'].append(
+                {"role": "assistant", "content": ai_response}
+            )
+        st.rerun()
+    
+    uploaded_file = st.file_uploader("Upload files:", type=['txt', 'pdf', 'docx', 'py'])
+    if uploaded_file:
+        st.success(f"File {uploaded_file.name} uploaded to Base 44 system")
+    
+    st.markdown('</div>', unsafe_allow_html=True)
 
+elif page == "Research Chatbot":
+    st.markdown('<div class="research-section">', unsafe_allow_html=True)
+    st.header("Research Department Chatbot")
+    st.markdown("**Connected to Research Department Manager AI and Research Sub-AIs Collective**")
+    
+    if 'research_chat' not in st.session_state.chat_messages:
+        st.session_state.chat_messages['research_chat'] = []
+    
+    research_mode = st.selectbox("Research Mode:", [
+        "Quick Research", "Deep Analysis", "Literature Review", "Data Analysis", "Fact Checking"
+    ])
+    
+    for message in st.session_state.chat_messages['research_chat']:
+        if message["role"] == "user":
+            st.markdown(f"**Researcher:** {message['content']}")
+        else:
+            st.markdown(f"**Research AI Network:** {message['content']}")
+    
+    research_query = st.text_area("Research Query:", height=100, key="research_input")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("Start Research", type="primary", key="research_send"):
+            if research_query:
+                st.session_state.chat_messages['research_chat'].append(
+                    {"role": "user", "content": research_query}
+                )
+                
+                with st.spinner(f"Research Department coordinating {research_mode}..."):
+                    time.sleep(2)
+                    response = ai_engine.generate_response(research_query, "research")
+                    st.session_state.chat_messages['research_chat'].append(
+                        {"role": "assistant", "content": response}
+                    )
+                st.rerun()
+    
+    with col2:
+        uploaded_research = st.file_uploader("Research Materials:", type=['pdf', 'docx', 'csv'])
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+elif page == "Night Operations Chatbot":
+    st.markdown('<div class="night-section">', unsafe_allow_html=True)
+    st.header("Night Coding Automator Chatbot")
+    st.markdown("**Connected to Night Coding Automator and Offline Coding Pipeline**")
+    
+    if 'night_chat' not in st.session_state.chat_messages:
+        st.session_state.chat_messages['night_chat'] = []
+    
+    for message in st.session_state.chat_messages['night_chat']:
+        if message["role"] == "user":
+            st.markdown(f"**Day User:** {message['content']}")
+        else:
+            st.markdown(f"**Night Automator:** {message['content']}")
+    
+    night_task = st.text_area("Queue for Night Processing:", height=100, key="night_input")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("Queue Task", type="primary", key="night_send"):
+            if night_task:
+                st.session_state.chat_messages['night_chat'].append(
+                    {"role": "user", "content": night_task}
+                )
+                
+                with st.spinner("Adding to Session Handoff Tracker..."):
+                    time.sleep(1)
+                    response = ai_engine.generate_response(
