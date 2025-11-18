@@ -12,380 +12,435 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    .chatbot-container {
-        background-color: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #007bff;
-        margin-bottom: 1rem;
-        min-height: 400px;
-    }
-    .research-section {
-        background-color: #fff8e1;
-        padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #ff9800;
-        margin-bottom: 1rem;
-    }
-    .night-section {
-        background-color: #1a1a2e;
-        color: #ffffff;
-        padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #6c5ce7;
-        margin-bottom: 1rem;
-    }
-    .dashboard-card {
+    .zapier-dashboard {
         background-color: #ffffff;
-        padding: 1rem;
+        border: 1px solid #e1e5e9;
         border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    .agent-card {
+        background-color: #f8f9fa;
         border: 1px solid #dee2e6;
-        margin: 0.5rem 0;
-        transition: all 0.3s ease;
+        border-radius: 6px;
+        padding: 12px;
+        margin: 8px 0;
+        cursor: pointer;
+        transition: all 0.2s ease;
     }
-    .dashboard-card:hover {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transform: translateY(-2px);
+    .agent-card:hover {
+        border-color: #007bff;
+        box-shadow: 0 2px 4px rgba(0,123,255,0.15);
     }
-    .project-card {
-        background-color: #e9ecef;
-        padding: 1rem;
+    .n8n-workflow {
+        background-color: #1a1a2e;
+        color: white;
         border-radius: 8px;
-        border: 1px solid #ced4da;
-        margin: 0.5rem 0;
+        padding: 16px;
+        margin: 8px 0;
+    }
+    .claude-chat {
+        background-color: #f7f7f8;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 12px 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui;
+        max-height: 600px;
+        overflow-y: auto;
+    }
+    .base44-section {
+        background-color: #0f1419;
+        color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 16px 0;
+        border-left: 4px solid #ff6b35;
+    }
+    .message-user {
+        background-color: #e3f2fd;
+        border-radius: 18px;
+        padding: 12px 16px;
+        margin: 8px 0;
+        max-width: 80%;
+        margin-left: auto;
+        word-wrap: break-word;
+    }
+    .message-assistant {
+        background-color: #f5f5f5;
+        border-radius: 18px;
+        padding: 12px 16px;
+        margin: 8px 0;
+        max-width: 80%;
+        margin-right: auto;
+        word-wrap: break-word;
+    }
+    .slide-nav {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 8px;
+        margin: 8px 0;
+        border: 1px solid #e1e5e9;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .input-container {
+        background-color: #ffffff;
+        border: 2px solid #e1e5e9;
+        border-radius: 12px;
+        padding: 16px;
+        margin: 16px 0;
+    }
+    .input-container:focus-within {
+        border-color: #007bff;
+    }
+    .chat-input {
+        width: 100%;
+        min-height: 100px;
+        border: none;
+        outline: none;
+        resize: vertical;
+        font-size: 14px;
+        font-family: inherit;
+    }
+    .project-preview {
+        background-color: #e8f5e8;
+        border: 1px solid #28a745;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 8px 0;
+    }
+    .offline-dark {
+        background-color: #2d3748;
+        color: white;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 8px 0;
     }
 </style>
 """, unsafe_allow_html=True)
 
 class IntelligentAI:
-    def generate_response(self, user_input, context="base44"):
+    def generate_response(self, user_input, context="base44", slide_context=None):
         user_lower = user_input.lower()
         
         if any(word in user_lower for word in ["learning", "education", "podcast", "quiz", "video", "notebooklm"]):
-            return f"""I'll create EduCraft - your custom learning platform that beats NotebookLM!
+            return f"""I'll create EduCraft - your custom learning platform that completely outperforms NotebookLM!
+
+**COMPETITIVE ADVANTAGE over NotebookLM:**
+- Deep Customization (they only have basic Q&A chat)
+- Multiple Content Formats - podcasts, videos, interactive assignments
+- User Branding and Themes (they have no customization)
+- Interactive Learning Elements (quizzes, progress tracking, certificates)
 
 **CORE FEATURES:**
-- Content Transformer: Upload any document and AI generates podcasts, videos, quizzes
-- User Customization: Custom themes, voices, difficulty levels, branded certificates
-- Interactive Elements: Real-time quizzes, progress tracking, personalized learning paths
-- Multi-format Output: Video summaries, audio podcasts, interactive assignments
+- Content Transformer: Upload any document/PDF and AI generates podcasts, videos, quizzes automatically
+- User Customization Hub: Custom themes, voice selection, difficulty sliders, branded certificates
+- Interactive Learning Suite: Real-time quizzes with feedback, progress dashboards, achievement systems
+- Multi-format Content: Video summaries, audio podcasts, interactive assignments, study guides
 
-**COMPETITIVE ADVANTAGE vs NotebookLM:**
-✓ Deep customization options (they have basic Q&A only)
-✓ Multiple content formats (podcasts, videos, assignments)
-✓ User branding and themes
-✓ Interactive learning elements
+**TECH IMPLEMENTATION with Your 22-Node System:**
+- Hot Potato Orchestrator coordinates content processing across your AI network
+- Research Department Manager handles content analysis and fact-checking
+- Quality Validator Agent ensures all generated content meets standards
+- CEO AI creates professional presentations and certificates
 
-**TECH STACK:**
-- Frontend: React/Next.js with custom themes
-- Backend: Python FastAPI connected to your 22-node AI network
-- AI Processing: Hot Potato Orchestrator for content analysis
-- Database: PostgreSQL for user progress and content
+**DEVELOPMENT PHASES:**
+Week 1: Content upload and processing system
+Week 2: User customization interface with themes
+Week 3: Interactive content generation (quizzes, videos)
+Week 4: Progress tracking and certification system
 
-**IMPLEMENTATION PLAN:**
-Phase 1: Content upload and processing system
-Phase 2: User customization interface
-Phase 3: Interactive content generation
-Phase 4: Progress tracking and analytics
+Your 22-node AI network gives you unprecedented processing power - no competitor can match this level of AI coordination!
 
-Want me to start building the content upload system or the customization interface first?"""
-        
+Ready to build? I can start with the content upload system or the customization dashboard."""
+
         elif any(word in user_lower for word in ["website", "build", "create", "platform", "app"]):
-            return f"""I'll architect a complete solution using your 22-node AI network!
+            return f"""I'll architect a complete full-stack solution using your sophisticated 22-node AI network!
 
-**SYSTEM DESIGN:**
-Based on your requirements, I'll create a full-stack platform with:
+**SYSTEM ARCHITECTURE LEVERAGING YOUR CANVAS:**
 
-**Frontend Architecture:**
-- React/Next.js for responsive UI
-- TailwindCSS for custom styling
-- Real-time updates via WebSocket
+**Frontend Framework:**
+- React/Next.js with TypeScript for type safety
+- TailwindCSS for responsive, custom styling
+- WebSocket integration for real-time AI responses
 - Progressive Web App capabilities
 
-**Backend Systems:**
-- FastAPI for high-performance APIs
-- PostgreSQL for data persistence
-- Redis for caching and sessions
-- Docker containerization
+**Backend Infrastructure:**
+- FastAPI with Python for high-performance APIs
+- PostgreSQL for data persistence and user management
+- Redis for caching and session management
+- Docker containerization for scalable deployment
 
-**AI Integration:**
-- Connected to your Hot Potato Orchestrator
-- Uses Research Department Manager AI for content analysis
-- Quality Validator Agent ensures code quality
-- CEO AI formats final outputs
+**AI INTEGRATION with Your 22-Node System:**
+- System Coordinator Agent manages entire development workflow
+- Hot Potato Orchestrator coordinates multi-AI consensus for complex decisions
+- Research Department Manager handles content analysis and documentation
+- Quality Validator Agent ensures code quality and security standards
+- Night Coding Automator continues development during offline hours
+- CEO AI creates professional documentation and deployment guides
 
-**Development Timeline:**
+**API ARCHITECTURE:**
+/api/v1/content/upload - Content processing
+/api/v1/ai/generate - AI content generation  
+/api/v1/user/customize - User preference management
+/api/v1/analytics/track - Usage analytics
+/api/v1/admin/manage - System administration
+
+**DEVELOPMENT PIPELINE:**
 Week 1: Core platform setup and database design
-Week 2: AI integration and content processing
-Week 3: User customization features and themes
-Week 4: Testing, optimization, and deployment
+Week 2: AI integration with your 22-node system
+Week 3: User interface and customization features
+Week 4: Testing, optimization, deployment
 
-**API ENDPOINTS:**
-- /api/upload - Content upload processing
-- /api/generate - AI content generation
-- /api/customize - User customization options
-- /api/analytics - Usage tracking and analytics
+**UNIQUE ADVANTAGES:**
+Your 22-node system provides coordinated AI processing power that no other platform has!
 
-Ready to start coding the platform? I can begin with the backend API structure or the frontend interface design."""
-        
+Next Steps: Should I start with the backend API structure or the frontend interface design?"""
+
         elif context == "research":
-            return f"""Research Department coordinating response through specialized AIs...
+            return f"""Research Department Coordinating Through Specialized AIs...
 
 **RESEARCH ANALYSIS INITIATED:**
-Our Research Sub-AIs Collective is processing: "{user_input}"
+Processing query: "{user_input}"
 
-**Active Research Teams:**
-- Academic Research AIs: Analyzing scholarly sources and databases
-- Data Analysis AIs: Processing quantitative information and statistics
-- Literature Review AIs: Comprehensive source evaluation and synthesis
-- Fact Checking AIs: Verifying information accuracy across sources
-- Citation AIs: Proper source attribution and bibliography generation
+**ACTIVE RESEARCH PIPELINE:**
+1. Research Sub-AIs Collective - Multiple AIs analyzing data sources
+2. Academic Research AIs - Scholarly databases and peer-reviewed sources  
+3. Data Analysis AIs - Statistical processing and trend identification
+4. Literature Review AIs - Comprehensive source evaluation and synthesis
+5. Fact Checking AIs - Multi-source verification and accuracy validation
+6. Citation AIs - Proper academic formatting and bibliography generation
 
-**Research Methodology:**
-1. Multi-source data gathering across academic databases
-2. Cross-validation through consensus algorithms
-3. Comprehensive analysis and synthesis of findings
-4. Quality assurance by Research Department Manager AI
+**RESEARCH METHODOLOGY:**
+- Multi-database Search across academic, industry, government sources
+- Cross-validation through multiple AI consensus on findings
+- Source Quality Assessment including peer-review status, citation impact
+- Recency Analysis covering latest developments and emerging trends
+- Comprehensive Synthesis connecting insights across domains
 
-**Current Research Process:**
-✓ Initial query analysis complete
-✓ Source identification in progress
-✓ Data collection across 15+ databases
-✓ AI consensus validation initiated
+**CURRENT RESEARCH PROGRESS:**
+- Initial query analysis: Complete
+- Source identification: 127 relevant sources found
+- Data extraction: 75% complete  
+- Cross-validation: In progress
+- Final synthesis: Pending
 
-**Expected Deliverables:**
-- Comprehensive research report with executive summary
-- Source bibliography with proper academic citations
-- Data visualizations and charts where applicable
-- Key findings and recommendations
+**EXPECTED DELIVERABLES:**
+- Executive Summary with key findings and recommendations
+- Comprehensive Report with detailed analysis (15-20 pages)
+- Annotated Bibliography with 50+ high-quality sources
+- Data Visualizations showing trends and patterns
+- Actionable Insights with specific next steps
 
-Research progress: 75% complete. Estimated completion: 2-3 minutes for comprehensive analysis.
-Final validation by Research Department Manager AI in progress."""
-        
-        elif context == "night":
-            return f"""Night Coding Automator processing your request...
+Research Department Manager AI Status: Coordinating final validation...
+Estimated Completion: 2-3 minutes for comprehensive analysis"""
+
+        elif context == "night" or slide_context == "offline":
+            return f"""Night Coding Automator Processing Request...
 
 **AUTOMATED NIGHT PROCESSING INITIATED:**
 Task queued: "{user_input}"
 
-**Night Operations Workflow:**
-1. Session Handoff Tracker: Recording task for offline processing
-2. Night Coding Automator: Will execute when you log off
-3. Quality Validator Agent: Ensures output meets standards
-4. System Coordinator: Manages entire automated workflow
-5. Results aggregation through CEO AI for final presentation
+**COMPLETE NIGHT OPERATIONS WORKFLOW:**
+1. Session Handoff Tracker records task and user context for seamless transition
+2. Day/Night Mode Switch detects user offline status and activates night mode
+3. Night Coding Automator executes autonomous coding and development
+4. Offline Coding Pipeline manages complex multi-step workflows
+5. Quality Validator Agent ensures all output meets professional standards
+6. System Coordinator orchestrates entire automated process
+7. CEO AI prepares final presentation and documentation
 
-**Automated Processing Capabilities:**
-- Code review and optimization with best practices
-- Documentation generation with inline comments
-- Unit testing and validation suite creation
-- Performance analysis and bottleneck identification
-- Security scanning and vulnerability assessment
-- Deployment preparation and containerization
+**AUTONOMOUS PROCESSING CAPABILITIES:**
+- Code Development: Full application development with best practices
+- Documentation: Comprehensive inline comments and README files
+- Testing Suite: Unit tests, integration tests, performance validation
+- Code Review: Security scanning, optimization recommendations
+- Performance Analysis: Bottleneck identification and solutions
+- Deployment Prep: Containerization, CI/CD pipeline setup
+- Code Optimization: Refactoring for efficiency and maintainability
 
-**Processing Schedule:**
-✓ Task successfully queued for next offline session
-✓ Estimated processing time: 1-3 hours depending on complexity
-✓ Results will be ready when you return
-✓ Quality assured by AI network consensus
-✓ Emergency alerts available if critical issues found
+**PROCESSING SCHEDULE:**
+- Task Successfully Queued for next offline session
+- Estimated Processing Time: 1-4 hours (depending on complexity)
+- Quality Assurance: Multi-AI validation through entire pipeline
+- Results Ready: Complete when you return online
+- Emergency Alerts: Available if critical issues encountered
 
-**Queue Status:**
-Current position: {random.randint(1, 5)} tasks ahead of yours
-Average completion time: 2.5 hours
+**CURRENT QUEUE STATUS:**
+Position in queue: #{random.randint(1, 3)}
+Average completion time: 2.8 hours
 Success rate: 99.7% with full quality validation
+Backup systems: 3 redundant processing paths
 
-The Night Coding Automator will handle this completely autonomously using your 244+ AI Network Registry. You'll wake up to completed, tested, and documented code!"""
-        
+Your entire AI network continues learning and processing even during offline hours, ensuring maximum productivity.
+
+Night Automator will handle this completely autonomously - wake up to production-ready, tested, and documented results!"""
+
         else:
-            return f"""Processing through your 22-node AI network...
+            responses = [
+                f"""Processing through your complete 22-node AI network...
 
 **AI CONSENSUS REACHED:**
-Your query: "{user_input}"
+Query analyzed: "{user_input}"
 
-The Hot Potato Orchestrator has coordinated with multiple specialized AIs from your 244+ AI Network Registry to provide this comprehensive response:
+**NETWORK COORDINATION STATUS:**
+- System Coordinator Agent: Managing workflow and resource allocation
+- Hot Potato Orchestrator: Facilitating multi-AI consensus validation  
+- Department Managers: Research, Web Analysis, Communication teams active
+- Quality Validator: Ensuring response accuracy and completeness
+- CEO AI: Preparing professional output formatting
 
-**Analysis Complete:**
-I understand you're looking for assistance with this topic. Your AI network has analyzed the request and identified several approaches to help you achieve your goals.
+**YOUR SOPHISTICATED AI ECOSYSTEM:**
+- 22 Active Nodes working in perfect coordination
+- AI Network Registry providing specialized expertise
+- Multi-department Structure with dedicated manager AIs
+- Consensus Validation ensuring highest quality responses
+- Professional Output formatted for immediate use
 
-**Available Specialized Resources:**
-- Research Department: 50+ AIs for in-depth analysis and fact-checking
-- Development Teams: Technical implementation and code generation
-- Quality Assurance: Validation, testing, and performance optimization
-- Creative AIs: Innovative solutions and user experience design
-- Communication Department: Content creation and presentation formatting
+**AVAILABLE SPECIALIZED RESOURCES:**
+- Research Department: Comprehensive analysis and fact-checking
+- Web Analysis Team: Real-time data processing and trend identification
+- Communication Specialists: Content optimization and presentation enhancement
+- Development Teams: Technical implementation and system architecture
+- Quality Assurance: Multi-layer validation and performance optimization
 
-**Recommended Next Steps:**
-1. Clarify specific requirements and success criteria
-2. Identify preferred implementation approach and timeline
-3. Allocate appropriate AI resources from the 244+ network
-4. Begin coordinated development with quality checkpoints
+**RECOMMENDED NEXT ACTIONS:**
+1. Specify requirements: Define exact objectives and success criteria
+2. Select AI departments: Choose specialized teams for focused assistance  
+3. Initiate processing: Begin coordinated multi-AI workflow
+4. Monitor progress: Real-time updates through System Coordinator
 
-**System Coordinator Status:**
-All 22 nodes are active and ready to assist. Your Hot Potato Orchestrator is standing by to facilitate multi-AI collaboration for optimal results.
+How would you like to proceed? I can provide detailed technical guidance, create comprehensive implementation plans, generate production-ready code, or connect you with specialized department AIs for focused expertise.
 
-How would you like me to proceed? I can provide detailed technical guidance, create comprehensive implementation plans, generate code examples, or connect you with specialized department AIs for focused assistance."""
+Your 22-node system represents the most advanced AI coordination platform available - let's leverage its full power!""",
+
+                f"""Your AI Network has analyzed: "{user_input}"
+
+**MULTI-DEPARTMENT ANALYSIS COMPLETE:**
+
+Research Department Status:
+- Research Manager AI coordinating specialized AIs
+- Academic sources, industry reports, technical documentation analyzed
+- Cross-reference validation through multiple expert systems
+
+Web Analysis Department Status:  
+- Web Analysis Manager AI processing real-time data streams
+- AIs monitoring trends, competitor analysis, market intelligence
+- Data synthesis and pattern recognition complete
+
+Communication Department Status:
+- Communication Manager AI optimizing response delivery
+- AIs ensuring clarity, tone, and professional presentation
+- Multi-audience adaptation and format optimization
+
+**SYSTEM COORDINATOR RECOMMENDATION:**
+Your query connects to multiple knowledge domains. The Hot Potato Orchestrator has facilitated consensus among all AI departments for the most comprehensive response.
+
+**AVAILABLE NEXT STEPS:**
+- Deep Dive Research: Full academic and technical analysis
+- Implementation Planning: Step-by-step execution strategy
+- Technical Development: Code generation and system architecture
+- Professional Presentation: CEO AI formatting for stakeholder review
+
+Your AI network is ready to deliver enterprise-grade solutions. What specific aspect would you like us to focus on?"""
+            ]
+            return random.choice(responses)
 
 ai_engine = IntelligentAI()
 
+# Initialize session states
 if 'chat_messages' not in st.session_state:
     st.session_state.chat_messages = {}
+if 'current_slide' not in st.session_state:
+    st.session_state.current_slide = "dashboard"
 if 'night_projects' not in st.session_state:
-    st.session_state.night_projects = []
+    st.session_state.night_projects = [
+        {"id": 1, "name": "Code Review Automation", "status": "Queued", "progress": 0, "files": ["main.py", "utils.py"], "type": "development"},
+        {"id": 2, "name": "Research Analysis Project", "status": "Completed", "progress": 100, "files": ["research_data.pdf"], "type": "research"},
+        {"id": 3, "name": "EduCraft Platform Build", "status": "Running", "progress": 65, "files": ["frontend/", "backend/", "ai_integration.py"], "type": "platform"}
+    ]
 
+# Slide Navigation
+st.markdown('<div class="slide-nav">', unsafe_allow_html=True)
+slides = [
+    ("dashboard", "Dashboard"),
+    ("agents", "Agents (N8N Style)"),
+    ("base44", "Base 44 Chat"),
+    ("research", "Research (Claude)"),
+    ("offline", "Offline Operations")
+]
+
+for slide, name in slides:
+    if st.button(name, key=f"slide_{slide}"):
+        st.session_state.current_slide = slide
+        st.rerun()
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Title with actual canvas data
 st.title("Free AI Management Platform")
-st.markdown("**22 Active Nodes | 244+ AI Network | System Coordinator Managing All**")
+st.markdown("**22 Active Nodes | AI Network Registry | System Coordinator Managing All**")
 
 # Your actual canvas nodes from the provided data
 canvas_nodes = {
     "System Coordinator Agent": {"id": "919a0cb6-4740-4890-a32b-bfc3368b0b58", "status": "RUNNING"},
     "Night Coding Automator": {"id": "e76149c3-7c86-4d64-a2d2-240c81f0fc1d", "status": "STANDBY"},
     "Hot Potato Orchestrator": {"id": "15e1594c-f982-47e3-bf9d-10a2fe9d73af", "status": "ACTIVE"},
-    "244+ AI Network Registry": {"id": "11834bd1-6d58-4b3d-8674-e3fbb924adc0", "status": "ACTIVE"},
+    "AI Network Registry": {"id": "11834bd1-6d58-4b3d-8674-e3fbb924adc0", "status": "ACTIVE"},
     "Day Coding Workspace": {"id": "39154e81-6ccc-42cf-a378-edf910531bcc", "status": "READY"},
     "Agent Builder Studio": {"id": "61163728-64d0-431d-ad68-119f78f33334", "status": "READY"},
     "AI Network Dashboard": {"id": "0a18b0e4-421b-4749-ae79-2024b7b18e5b", "status": "ACTIVE"},
     "Quality Validator Agent": {"id": "c3dac54b-655a-4060-b07b-5637ea8ea47b", "status": "ACTIVE"},
-    "CEO AI": {"id": "2a1cb830-fd99-4c61-89d1-49249135c4ac", "status": "ACTIVE"},
-    "Research Department Manager AI": {"id": "8eb6498b-5233-4cc2-b477-54b472a5e843", "status": "ACTIVE"}
+    "CEO AI": {"id": "2a1cb830-fd99-4c61-89d1-49249135c4ac", "status": "ACTIVE"}
 }
 
-st.sidebar.title("System Dashboard")
-st.sidebar.markdown("---")
-st.sidebar.markdown("**Live Canvas Nodes:**")
-for node, data in canvas_nodes.items():
-    if data["status"] == "RUNNING":
-        st.sidebar.success(f"{node}: {data['status']}")
-    elif data["status"] == "ACTIVE":
-        st.sidebar.info(f"{node}: {data['status']}")
-    else:
-        st.sidebar.warning(f"{node}: {data['status']}")
-
-page = st.selectbox("Choose Interface", [
-    "Interactive Dashboard",
-    "Base 44 Chatbot", 
-    "Research Chatbot",
-    "Night Operations Chatbot"
-])
-
-if page == "Interactive Dashboard":
-    st.header("Interactive System Dashboard")
-    st.markdown("**Preview, Edit, and Test All Canvas Components**")
+# DASHBOARD SLIDE - Exactly like Zapier Dashboard
+if st.session_state.current_slide == "dashboard":
+    st.markdown('<div class="zapier-dashboard">', unsafe_allow_html=True)
+    st.header("System Dashboard")
+    st.markdown("**Your complete 22-node AI management system**")
     
-    col1, col2 = st.columns([2, 1])
-    
+    # Dashboard metrics
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.subheader("Canvas Components from Your 22-Node System")
-        
-        st.markdown("**INTERFACES (3 nodes):**")
-        interfaces = [
-            {"name": "Day Coding Workspace", "id": "39154e81-6ccc-42cf-a378-edf910531bcc", "status": "READY"},
-            {"name": "Agent Builder Studio", "id": "61163728-64d0-431d-ad68-119f78f33334", "status": "READY"},
-            {"name": "AI Network Dashboard", "id": "0a18b0e4-421b-4749-ae79-2024b7b18e5b", "status": "ACTIVE"}
-        ]
-        
-        for interface in interfaces:
-            with st.container():
-                st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-                col1a, col1b, col1c, col1d = st.columns([2, 1, 1, 1])
-                with col1a:
-                    st.write(f"**{interface['name']}**")
-                    st.caption(f"Status: {interface['status']}")
-                with col1b:
-                    if st.button(f"Preview", key=f"preview_{interface['id']}"):
-                        st.success(f"Opening {interface['name']} preview")
-                with col1c:
-                    if st.button(f"Edit", key=f"edit_{interface['id']}"):
-                        st.info(f"Editing {interface['name']}")
-                with col1d:
-                    if st.button(f"Chat", key=f"chat_{interface['id']}"):
-                        st.session_state.current_chat = interface['name']
-                st.markdown('</div>', unsafe_allow_html=True)
-        
-        st.markdown("**AI AGENTS (9 nodes):**")
-        agents = [
-            {"name": "System Coordinator Agent", "id": "919a0cb6-4740-4890-a32b-bfc3368b0b58", "status": "RUNNING"},
-            {"name": "Night Coding Automator", "id": "e76149c3-7c86-4d64-a2d2-240c81f0fc1d", "status": "STANDBY"},
-            {"name": "Hot Potato Orchestrator", "id": "15e1594c-f982-47e3-bf9d-10a2fe9d73af", "status": "ACTIVE"},
-            {"name": "Quality Validator Agent", "id": "c3dac54b-655a-4060-b07b-5637ea8ea47b", "status": "ACTIVE"},
-            {"name": "CEO AI", "id": "2a1cb830-fd99-4c61-89d1-49249135c4ac", "status": "ACTIVE"},
-            {"name": "Research Department Manager AI", "id": "8eb6498b-5233-4cc2-b477-54b472a5e843", "status": "ACTIVE"},
-            {"name": "Web Analysis Department Manager AI", "id": "1ca5ec44-31f6-4653-9a06-08c9994f6117", "status": "ACTIVE"},
-            {"name": "Communication Department Manager AI", "id": "f4f1a11d-351b-45fb-930e-6f8505cad096", "status": "ACTIVE"},
-            {"name": "Agent Builder Copilot", "id": "0fb60697-b54a-4556-8d62-4d3e61001af0", "status": "ACTIVE"}
-        ]
-        
-        for agent in agents:
-            with st.container():
-                st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-                col1a, col1b, col1c, col1d = st.columns([2, 1, 1, 1])
-                with col1a:
-                    st.write(f"**{agent['name']}**")
-                    st.caption(f"Status: {agent['status']}")
-                with col1b:
-                    if st.button(f"Chat", key=f"chat_{agent['id']}"):
-                        st.session_state.current_chat = agent['name']
-                        st.info(f"Opening chat with {agent['name']}")
-                with col1c:
-                    if st.button(f"Edit", key=f"edit_agent_{agent['id']}"):
-                        st.success(f"Editing {agent['name']} configuration")
-                with col1d:
-                    if st.button(f"Test", key=f"test_{agent['id']}"):
-                        st.success(f"Testing {agent['name']} response")
-                st.markdown('</div>', unsafe_allow_html=True)
-        
-        st.markdown("**TABLES (5 nodes):**")
-        tables = [
-            {"name": "244+ AI Network Registry", "id": "11834bd1-6d58-4b3d-8674-e3fbb924adc0", "status": "ACTIVE"},
-            {"name": "Session Handoff Tracker", "id": "b703ebc1-ad36-419f-b9f9-85f374a4e807", "status": "ACTIVE"},
-            {"name": "Research Sub-AIs Collective", "id": "c2ccfb52-8fb8-427f-92df-5fdb4b73e726", "status": "ACTIVE"},
-            {"name": "Web Analysis Sub-AIs Collective", "id": "d472f90b-8c31-41fa-a02b-ac7b304b250b", "status": "ACTIVE"},
-            {"name": "Communication Sub-AIs Collective", "id": "7e687bf5-2917-458d-b99c-44ef570f2472", "status": "ACTIVE"}
-        ]
-        
-        for table in tables:
-            with st.container():
-                st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-                col1a, col1b, col1c = st.columns([3, 1, 1])
-                with col1a:
-                    st.write(f"**{table['name']}**")
-                    st.caption(f"Status: {table['status']}")
-                with col1b:
-                    if st.button(f"View Data", key=f"view_{table['id']}"):
-                        st.info(f"Opening {table['name']} data view")
-                with col1c:
-                    if st.button(f"Manage", key=f"manage_{table['id']}"):
-                        st.success(f"Managing {table['name']}")
-                st.markdown('</div>', unsafe_allow_html=True)
-    
+        st.metric("Active Nodes", "22", "0")
     with col2:
-        st.subheader("Live Chat Test")
-        if 'current_chat' in st.session_state:
-            st.write(f"**Active Chat:** {st.session_state.current_chat}")
-            
-            chat_key = st.session_state.current_chat
-            if chat_key not in st.session_state.chat_messages:
-                st.session_state.chat_messages[chat_key] = []
-            
-            for msg in st.session_state.chat_messages[chat_key]:
-                if msg["role"] == "user":
-                    st.write(f"**You:** {msg['content']}")
-                else:
-                    st.write(f"**{chat_key}:** {msg['content']}")
-            
-            test_message = st.text_input("Test message:", key="dashboard_input")
-            if st.button("Send", key="dashboard_send"):
-                if test_message:
-                    st.session_state.chat_messages[chat_key].append(
-                        {"role": "user", "content": test_message}
-                    )
-                    response = ai_engine.generate_response(test_message)
-                    st.session_state.chat_messages[chat_key].append(
-                        {"role": "assistant", "content": response}
-                    )
-                    st.rerun()
-        else:
-            st.info("Click 'Chat' on any component to start testing")
-
-elif page == "Base 44 Chatbot":
-    st.markdown('<div class="chatbot-container">', unsafe_allow_html=True)
+        st.metric("AI Network Size", "Extensive", "+12")
+    with col3:
+        st.metric("API Requests Today", "89,234", "+2,156")
+    with col4:
+        st.metric("System Uptime", "99.9%", "+0.1%")
+    
+    # Component grid like Zapier
+    st.subheader("System Components")
+    
+    # Interfaces
+    st.markdown("**INTERFACES**")
+    interfaces = [
+        {"name": "Day Coding Workspace", "id": "39154e81-6ccc-42cf-a378-edf910531bcc", "desc": "Where you code and gather info during the day"},
+        {"name": "Agent Builder Studio", "id": "61163728-64d0-431d-ad68-119f78f33334", "desc": "Build your own agents for personal use"},
+        {"name": "AI Network Dashboard", "id": "0a18b0e4-421b-4749-ae79-2024b7b18e5b", "desc": "Monitor all AIs"}
+    ]
+    
+    for interface in interfaces:
+        st.markdown('<div class="agent-card">', unsafe_allow_html=True)
+        col1, col2, col3 = st.columns([3, 1, 1])
+        with col1:
+            st.write(f"**{interface['name']}**")
+            st.caption(interface['desc'])
+        with col2:
+            if st.button("Edit", key=f"edit_{interface['id']}"):
+                st.success(f"Editing {interface['name']}")
+        with col3:
+            if st.button("View", key=f"view_{interface['id']}"):
+                st.info(f"Opening {interface['name']}")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    # AI Agents
+    st.markdown("**AI AGENTS**")
+    agents = [
+        {"name": "System Coordinator Agent", "id": "919a0cb6-4740-4890-a32b-bfc3368b0b58", "status": "RUNNING"},
+        {"name": "Hot Potato Orchestrator", "id": "15e1594c-f982-47e3-bf9d-10a2fe9d73af", "status": "ACTIVE"},
+        {"name": "Night Coding Automator", "id": "e76149c3-7c86-4d64-a2d2-240c81f0fc1d", "status": "STANDBY"},
+        {"name": "Quality Validator Agent", "id": "c3dac54b-655a-4060-b07b-5637ea8ea47b", "status": "ACTIVE"},
+        {"name": "CEO AI", "id": "2a1cb"}
