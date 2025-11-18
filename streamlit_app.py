@@ -443,4 +443,234 @@ if st.session_state.current_slide == "dashboard":
         {"name": "Hot Potato Orchestrator", "id": "15e1594c-f982-47e3-bf9d-10a2fe9d73af", "status": "ACTIVE"},
         {"name": "Night Coding Automator", "id": "e76149c3-7c86-4d64-a2d2-240c81f0fc1d", "status": "STANDBY"},
         {"name": "Quality Validator Agent", "id": "c3dac54b-655a-4060-b07b-5637ea8ea47b", "status": "ACTIVE"},
-        {"name": "CEO AI", "id": "2a1cb
+        {"name": "CEO AI", "id": "2a1cb830-fd99-4c61-89d1-49249135c4ac", "status": "ACTIVE"}
+    ]
+    
+    for agent in agents:
+        with st.container():
+            st.markdown('<div class="agent-card">', unsafe_allow_html=True)
+            col1a, col1b, col1c, col1d = st.columns([2, 1, 1, 1])
+            with col1a:
+                st.write(f"**{agent['name']}**")
+                st.caption(f"Status: {agent['status']}")
+            with col1b:
+                if st.button("Chat", key=f"chat_{agent['id']}"):
+                    st.session_state.current_chat = agent['name']
+                    st.session_state.current_slide = "base44"
+                    st.rerun()
+            with col1c:
+                if st.button("Edit", key=f"edit_agent_{agent['id']}"):
+                    st.success(f"Editing {agent['name']}")
+            with col1d:
+                if st.button("Test", key=f"test_agent_{agent['id']}"):
+                    st.info(f"Testing {agent['name']}")
+            st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# AGENTS SLIDE - N8N Style with Zapier Copilot Combined
+elif st.session_state.current_slide == "agents":
+    st.markdown('<div class="n8n-workflow">', unsafe_allow_html=True)
+    st.header("Agent Workflow Builder (N8N + Zapier Copilot)")
+    st.markdown("**Drag and drop agents to build complex AI workflows**")
+    
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.subheader("Workflow Canvas")
+        st.markdown("**Current Workflow: Day to Night to Quality to CEO**")
+        
+        workflow_steps = [
+            "Day Coding Workspace",
+            "Hot Potato Orchestrator", 
+            "AI Consensus Engine",
+            "System Coordinator Agent",
+            "CEO AI"
+        ]
+        
+        for i, step in enumerate(workflow_steps):
+            st.markdown(f"**{i+1}. {step}**")
+        
+        st.markdown("**Build your workflow:**")
+        workflow_input = st.text_area(
+            "",
+            height=150,
+            placeholder="Describe the AI workflow you want to build...",
+            key="workflow_builder"
+        )
+        
+        if st.button("Build Workflow with AI Copilot", type="primary"):
+            if workflow_input:
+                with st.spinner("AI Copilot analyzing your workflow requirements..."):
+                    time.sleep(2)
+                    st.success("Workflow blueprint created!")
+    
+    with col2:
+        st.subheader("Available Agents")
+        
+        available_agents = [
+            "System Coordinator Agent",
+            "Hot Potato Orchestrator", 
+            "Night Coding Automator",
+            "Quality Validator Agent",
+            "CEO AI"
+        ]
+        
+        for agent in available_agents:
+            if st.button(f"+ {agent}", key=f"add_{agent}"):
+                st.info(f"Added {agent} to workflow")
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# BASE 44 CHAT SLIDE
+elif st.session_state.current_slide == "base44":
+    st.markdown('<div class="base44-section">', unsafe_allow_html=True)
+    st.header("Base 44 AI Chat")
+    st.markdown("**Connected to Hot Potato Orchestrator and AI Network**")
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('<div class="claude-chat">', unsafe_allow_html=True)
+    
+    if 'base44_chat' not in st.session_state.chat_messages:
+        st.session_state.chat_messages['base44_chat'] = []
+    
+    for message in st.session_state.chat_messages['base44_chat']:
+        if message["role"] == "user":
+            st.markdown(f'<div class="message-user">{message["content"]}</div>', unsafe_allow_html=True)
+        else:
+            st.markdown(f'<div class="message-assistant">{message["content"]}</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown("**Type your message:**")
+    user_input = st.text_area(
+        "",
+        height=120,
+        placeholder="Ask anything...",
+        key="base44_input"
+    )
+    
+    col1, col2 = st.columns([4, 1])
+    with col1:
+        pass
+    with col2:
+        send_button = st.button("Send", type="primary", key="base44_send")
+    
+    if send_button and user_input:
+        st.session_state.chat_messages['base44_chat'].append(
+            {"role": "user", "content": user_input}
+        )
+        
+        with st.spinner("Processing..."):
+            time.sleep(1)
+            ai_response = ai_engine.generate_response(user_input, "base44")
+            st.session_state.chat_messages['base44_chat'].append(
+                {"role": "assistant", "content": ai_response}
+            )
+        st.rerun()
+
+# RESEARCH CHAT SLIDE
+elif st.session_state.current_slide == "research":
+    st.markdown('<div class="claude-chat">', unsafe_allow_html=True)
+    st.header("Research Department Chatbot")
+    
+    if 'research_chat' not in st.session_state.chat_messages:
+        st.session_state.chat_messages['research_chat'] = []
+    
+    research_mode = st.selectbox("Research Mode:", [
+        "Quick Research", "Deep Analysis", "Literature Review"
+    ])
+    
+    for message in st.session_state.chat_messages['research_chat']:
+        if message["role"] == "user":
+            st.markdown(f'<div class="message-user">{message["content"]}</div>', unsafe_allow_html=True)
+        else:
+            st.markdown(f'<div class="message-assistant">{message["content"]}</div>', unsafe_allow_html=True)
+    
+    research_query = st.text_area("Research Query:", height=100, key="research_input")
+    
+    if st.button("Start Research", type="primary", key="research_send"):
+        if research_query:
+            st.session_state.chat_messages['research_chat'].append(
+                {"role": "user", "content": research_query}
+            )
+            
+            with st.spinner("Research Department coordinating..."):
+                time.sleep(2)
+                response = ai_engine.generate_response(research_query, "research")
+                st.session_state.chat_messages['research_chat'].append(
+                    {"role": "assistant", "content": response}
+                )
+            st.rerun()
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# OFFLINE OPERATIONS SLIDE
+elif st.session_state.current_slide == "offline":
+    st.markdown('<div class="offline-dark">', unsafe_allow_html=True)
+    st.header("Night Operations Chatbot")
+    
+    if 'night_chat' not in st.session_state.chat_messages:
+        st.session_state.chat_messages['night_chat'] = []
+    
+    for message in st.session_state.chat_messages['night_chat']:
+        if message["role"] == "user":
+            st.markdown(f"**Day User:** {message['content']}")
+        else:
+            st.markdown(f"**Night Automator:** {message['content']}")
+    
+    night_task = st.text_area("Queue for Night Processing:", height=100, key="night_input")
+    
+    if st.button("Queue Task", type="primary", key="night_send"):
+        if night_task:
+            st.session_state.chat_messages['night_chat'].append(
+                {"role": "user", "content": night_task}
+            )
+            
+            with st.spinner("Adding to Session Handoff Tracker..."):
+                time.sleep(1)
+                response = ai_engine.generate_response(night_task, "night")
+                st.session_state.chat_messages['night_chat'].append(
+                    {"role": "assistant", "content": response}
+                )
+            st.rerun()
+    
+    st.subheader("Night Project Management")
+    
+    for project in st.session_state.night_projects:
+        st.markdown('<div class="project-preview">', unsafe_allow_html=True)
+        
+        col1, col2, col3 = st.columns([2, 1, 1])
+        
+        with col1:
+            st.write(f"**{project['name']}**")
+            st.write(f"Status: {project['status']}")
+            if project['progress'] > 0:
+                st.progress(project['progress'] / 100)
+        
+        with col2:
+            if project['status'] == "Completed":
+                if st.button(f"Preview Results", key=f"preview_{project['id']}"):
+                    st.success(f"Opening preview for {project['name']}")
+        
+        with col3:
+            if project['status'] in ["Running", "Queued"]:
+                if st.button(f"Stop Project", key=f"stop_{project['id']}"):
+                    project['status'] = "Stopped"
+                    st.rerun()
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# Footer
+st.markdown("---")
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.metric("Total Nodes Active", "22", "0")
+with col2:
+    st.metric("AI Network Size", "Extensive", "+12")
+with col3:
+    st.metric("API Accounts Available", "1000+", "Auto-scaling")
+with col4:
+    st.metric("System Uptime", "99.9%", "+0.1%")
